@@ -15,7 +15,7 @@
     </parent>
     <groupId>fede.springframework</groupId>
     <artifactId>pet-clinic</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>pet-clinic</name>
     <description>pet-clinic springboot project</description>
 
@@ -41,7 +41,7 @@
     </build>
     <scm>
         <developerConnection>scm:git:https://github.com/federicofrontera/PetClinic.git</developerConnection>
-      <tag>pet-clinic-0.0.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>

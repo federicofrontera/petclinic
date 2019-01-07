@@ -1,11 +1,12 @@
 package fede.springframework.petclinic.services.map;
 
 import fede.springframework.petclinic.model.Pet;
-import fede.springframework.petclinic.services.CrudService;
 import fede.springframework.petclinic.services.PetService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
 
     @Override
@@ -28,6 +29,7 @@ public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetS
         super.delete(object);
 
     }
+
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);

@@ -2,9 +2,11 @@ package fede.springframework.petclinic.services.map;
 
 import fede.springframework.petclinic.model.Owner;
 import fede.springframework.petclinic.services.OwnerService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
     @Override
     public Set<Owner> findAll() {
@@ -26,6 +28,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
         super.delete(object);
 
     }
+
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>List of Pet Owners</title>
 </head>
 <body>
 <!--/*@thymesVar id="owner" type="fede.springframework.petclinic.model.Owner"*/-->
+
 <h1 th:text="'List of Owners'">List of Owners</h1>
 <table>
     <thead>
@@ -16,6 +17,7 @@
     </tr>
     </thead>
     <tbody>
+    <!-- Your IndexController not setting owners in model object, hence this will not work. -->
     <tr th:each="owner : ${owners}">
         <td th:text="${owner.id}">1</td>
         <td th:text="${owner.firstName}">Joe</td>

@@ -2,10 +2,11 @@ package fede.springframework.petclinic.services.map;
 
 import fede.springframework.petclinic.model.Pet;
 import fede.springframework.petclinic.services.CrudService;
+import fede.springframework.petclinic.services.PetService;
 
 import java.util.Set;
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CrudService<Pet, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
 
     @Override
     public Set<Pet> findAll() {

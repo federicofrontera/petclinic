@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
@@ -34,6 +36,12 @@ public class DataLoader implements CommandLineRunner {
         owner2.setLastName("Smith");
 
         ownerService.save(owner2);
+
+        Set<Owner> set = ownerService.findAll();
+
+        for(Owner o : set){
+            System.out.println(o.getLastName());
+        }
 
         System.out.println("Loaded owners...");
 

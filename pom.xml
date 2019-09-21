@@ -14,7 +14,7 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>fede.springframework</groupId>
-    <artifactId>pet-clinic</artifactId>
+    <artifactId>pet-clinic</artifactId>++
     <version>0.0.3-SNAPSHOT</version>
     <name>pet-clinic</name>
     <description>pet-clinic springboot project</description>

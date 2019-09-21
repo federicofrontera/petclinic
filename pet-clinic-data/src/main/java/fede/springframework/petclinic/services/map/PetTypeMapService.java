@@ -1,5 +1,6 @@
 package fede.springframework.petclinic.services.map;
 
+import fede.springframework.petclinic.model.Pet;
 import fede.springframework.petclinic.model.PetType;
 import fede.springframework.petclinic.services.PetTypeService;
 import org.springframework.stereotype.Service;
@@ -15,22 +16,24 @@ public class PetTypeMapService extends AbstractMapService<PetType, Long> impleme
     }
 
     @Override
-    public PetType save(PetType object) {
-        return super.save(object);
-    }
-
-    @Override
     public PetType findById(Long id) {
         return super.findById(id);
     }
 
     @Override
+    public PetType save(PetType object) {
+        return super.save(object);
+    }
+
+    @Override
     public void delete(PetType object) {
         super.delete(object);
+
     }
 
     @Override
     public void deleteById(Long id) {
         super.deleteById(id);
+
     }
 }

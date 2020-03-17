@@ -1,6 +1,7 @@
 package fede.springframework.petclinic.controllers;
 
 import fede.springframework.petclinic.model.Owner;
+import fede.springframework.petclinic.model.Pet;
 import fede.springframework.petclinic.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,7 @@ public class OwnerController {
     public ModelAndView showOwner(@PathVariable("ownerId") Long ownerId) {
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
         Owner owner = this.ownerService.findById(ownerId);
-/*        for (Pet pet : owner.getPets()) {
+/*      for (Pet pet : owner.getPets()) {
             pet.setVisitsInternal(visits.findByPetId(pet.getId()));
         }*/
         mav.addObject(owner);

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.PostRemove;
 import java.util.Set;
 
 @Service
@@ -41,9 +40,9 @@ public class OwnerMapService extends AbstractMapService<Owner, Long> implements 
             if (object.getPets() != null){
                 object.getPets().forEach(pet -> {
 
-                    if(pet.getPetType() != null){
-                         if(pet.getPetType().getId() == null){
-                             pet.setPetType(petTypeService.save(pet.getPetType()));
+                    if(pet.getType() != null){
+                         if(pet.getType().getId() == null){
+                             pet.setType(petTypeService.save(pet.getType()));
                          }
                     }
                     else {

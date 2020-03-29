@@ -79,4 +79,8 @@ public class Owner extends Person{
         }
         pet.setOwner(this);
     }
+
+    public Set<Pet> getPets(){
+        return this.pets;
+    }
 }

@@ -34,20 +34,15 @@ public class VisitControllerTest {
     private static final String PETS_CREATE_OR_UPDATE_VISIT_FORM = "pets/createOrUpdateVisitForm";
     private static final String REDIRECT_OWNERS_1 = "redirect:/owners/{ownerId}";
     private static final String YET_ANOTHER_VISIT_DESCRIPTION = "yet another visit";
-
-    @Mock
-    PetService petService;
-
-    @Mock
-    VisitService visitService;
-
-    @InjectMocks
-    VisitController visitController;
-
-    private MockMvc mockMvc;
-
     private final UriTemplate visitsUriTemplate = new UriTemplate("/owners/{ownerId}/pets/{petId}/visits/new");
     private final Map<String, String> uriVariables = new HashMap<>();
+    @Mock
+    PetService petService;
+    @Mock
+    VisitService visitService;
+    @InjectMocks
+    VisitController visitController;
+    private MockMvc mockMvc;
     private URI visitsUri;
 
     @BeforeEach
@@ -58,7 +53,7 @@ public class VisitControllerTest {
                 .thenReturn(
                         Pet.builder()
                                 .id(petId)
-                                .birthDate(LocalDate.of(2018,11,13))
+                                .birthDate(LocalDate.of(2018, 11, 13))
                                 .name("Cutie")
                                 .visits(new HashSet<>())
                                 .owner(Owner.builder()
@@ -89,16 +84,15 @@ public class VisitControllerTest {
         ;
     }
 
-//todo check if test works after validation
-@Test
-void processNewVisitForm() throws Exception {
-    mockMvc.perform(post(visitsUri)
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("date","2020-11-11")
-            .param("description", YET_ANOTHER_VISIT_DESCRIPTION))
-            .andExpect(status().is3xxRedirection())
-            .andExpect(view().name(REDIRECT_OWNERS_1))
-            .andExpect(model().attributeExists("visit"))
-    ;
-}
+
+    @Test
+    void processNewVisitForm() throws Exception {
+        mockMvc.perform(post(visitsUri)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("date", "2020-11-11")
+                .param("description", YET_ANOTHER_VISIT_DESCRIPTION))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name(REDIRECT_OWNERS_1))
+                .andExpect(model().attributeExists("visit"));
+    }
 }

@@ -6,6 +6,7 @@ import fede.springframework.petclinic.model.PetType;
 import fede.springframework.petclinic.services.OwnerService;
 import fede.springframework.petclinic.services.PetService;
 import fede.springframework.petclinic.services.PetTypeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
 import java.util.Collection;
 
+@Slf4j
 @Controller
 @RequestMapping("/owners/{ownerId}")
 public class PetController {
@@ -46,9 +50,15 @@ public class PetController {
         return this.ownerService.findById(ownerId);
     }
 
-    @InitBinder("owner")
+    @InitBinder
     public void initOwnerBinder(WebDataBinder dataBinder) {
         dataBinder.setDisallowedFields("id");
+        dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                setValue(LocalDate.parse(text));
+            }
+        });
     }
 
     @GetMapping("/pets/new")
@@ -70,8 +80,7 @@ public class PetController {
         if (result.hasErrors()) {
             model.put("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
-        }
-        else {
+        } else {
             this.petService.save(pet);
             return "redirect:/owners/" + owner.getId();
         }
@@ -84,14 +93,15 @@ public class PetController {
     }
 
     @PostMapping("/pets/{petId}/edit")
-    public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, Model model) {
+    public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model, @PathVariable Long petId) {
         if (result.hasErrors()) {
             pet.setOwner(owner);
-            model.addAttribute("pet", pet);
+            model.put("pet", pet);
             return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
         }
         else {
-            owner.getPets().add(pet);
+            pet.setId(petId);
+            owner.addPet(pet);
             petService.save(pet);
             return "redirect:/owners/" + owner.getId();
         }

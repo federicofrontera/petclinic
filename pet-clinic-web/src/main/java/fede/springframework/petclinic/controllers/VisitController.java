@@ -36,20 +36,22 @@ public class VisitController {
 
         dataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
             @Override
-            public void setAsText(String text) throws IllegalArgumentException{
+            public void setAsText(String text) throws IllegalArgumentException {
                 setValue(LocalDate.parse(text));
             }
         });
     }
+
     /**
      * Called before each and every @RequestMapping annotated method. 2 goals: - Make sure
      * we always have fresh data - Since we do not use the session scope, make sure that
      * Pet object always has an id (Even though id is not part of the form fields)
+     *
      * @param petId
      * @return Pet
      */
     @ModelAttribute("visit")
-    public Visit loadPetWithVisit(@PathVariable("petId") Long  petId, Model model) {
+    public Visit loadPetWithVisit(@PathVariable("petId") Long petId, Model model) {
         Pet pet = petService.findById(petId);
         model.addAttribute("pet", pet);
         Visit visit = new Visit();
